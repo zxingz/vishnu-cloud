@@ -2,7 +2,7 @@ docker swarm init --advertise-addr 192.168.0.11
 
 docker swarm join --token SWMTKN-1-47ti6yq0b7fcmlxvnbozf31ihncbokujg9mey0dp029s4dasrt-8799l8qdo0cj9u8xbbgyxlhgp 192.168.0.11:2377
 
-docker network create --driver overlay --scope swarm airflow-net
+docker network create --driver overlay --scope swarm cloud-net
 
 cd /home/vishnu/Desktop/AIRFLOW/dockerfile/
 
@@ -19,5 +19,5 @@ airflow1.8.1 \
 airflow webserver
 
 
-docker network rm airflow-net
+docker network rm cloud-net
 docker swarm leave --force

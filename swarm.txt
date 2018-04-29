@@ -1,0 +1,6 @@
+docker swarm init --advertise-addr 192.168.0.11
+
+docker network create --driver overlay --scope swarm cloud-net
+
+docker network rm cloud-net
+docker swarm leave --force
