@@ -1,0 +1,23 @@
+docker swarm init --advertise-addr 192.168.0.11
+
+docker swarm join --token SWMTKN-1-47ti6yq0b7fcmlxvnbozf31ihncbokujg9mey0dp029s4dasrt-8799l8qdo0cj9u8xbbgyxlhgp 192.168.0.11:2377
+
+docker network create --driver overlay --scope swarm airflow-net
+
+cd /home/vishnu/Desktop/AIRFLOW/dockerfile/
+
+
+#########webserver###########
+
+docker service create \
+--replicas 1 \
+--name airflow_webserver \
+--network airflow-net \
+--publish 8080:8080 \
+--mount source=/home/vishnu/Desktop/AIRFLOW/data/workflow,target=/usr/src/app/workflow,type=bind \
+airflow1.8.1 \
+airflow webserver
+
+
+docker network rm airflow-net
+docker swarm leave --force
